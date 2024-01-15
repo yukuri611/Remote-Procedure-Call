@@ -12,10 +12,10 @@ import socket
 import math
 import json
 import os
-floor = lambda x: math.floor(x)
-nroot = lambda n,x: math.pow(x,1/n)
-reverse = lambda s: s[::-1]
-validAnagram = lambda str1,str2: sorted(str1) == sorted(str2)
+floor = lambda arr: math.floor(arr[0])
+nroot = lambda arr: math.pow(arr[0],1/arr[1])
+reverse = lambda arr: arr[0][::-1]
+validAnagram = lambda arr: sorted(arr[0]) == sorted(arr[1])
 sort = lambda str_arr: sorted(str_arr)
 
 function_hashmap = {"floor": floor, "nroot": nroot, "reverse": reverse, "validAnagram": validAnagram, "sort": sort}
@@ -45,8 +45,9 @@ while True:
     param_types = json_data["param_types"]
     id = json_data["id"]
 
-    results = function_hashmap[method](params)
-    print(results)
+    print(type(params))
+
+    results= function_hashmap[method](params)
     reply = {"results": results, "result_type":"int", "id": id}
     json_reply = json.dumps(reply)
     connection.sendall(json_reply.encode())
